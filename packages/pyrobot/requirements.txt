@@ -1,0 +1,10 @@
+python_dotenv
+flask
+flask_socketio
+flask_cors
+apscheduler
+routes
+cache
+updater
+web3
+requests

@@ -3,6 +3,9 @@ import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 
+const projectId = process.env.NEXT_PUBLIC_INFURA_API_KEY || "Create .env file in root directory and enter API key";
+//const projectId = "Test";
+
 const Home: NextPage = () => {
   return (
     <>
@@ -13,6 +16,12 @@ const Home: NextPage = () => {
             <span className="block text-2xl mb-2">Welcome to</span>
             <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
           </h1>
+          <p className="text-center text-lg">
+            Api key is{" "}
+            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
+              {projectId}
+            </code>
+          </p>
           <p className="text-center text-lg">
             Get started by editing{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
