@@ -306,8 +306,12 @@ We welcome contributions to Scaffold-ETH 2!
 
 Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
 
-Python Integration
+### Python Integration
 
 To run the python integration you need to run:
 
-python app.py from the pyrobot directory
+```shell
+python app.py
+```
+
+from the pyrobot directory
