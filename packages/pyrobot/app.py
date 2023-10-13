@@ -1,12 +1,22 @@
-import os
-from dotenv import load_dotenv
+from flask import Flask
+from flask_socketio import SocketIO
+from apscheduler.schedulers.background import BackgroundScheduler
+from routes import APIRoutes
+from cache import Cache
+from updater import start_updates
 
-# Load environment variables from .env file
-load_dotenv()
+# Initialize app and other global resources
+app = Flask(__name__)
+socketio = SocketIO(app)
+cache = Cache()
 
-# Access environment variables
-api_key = os.environ['NEXT_PUBLIC_INFURA_API_KEY'] 
+# Initialize routes
+api_routes = APIRoutes(app, socketio, cache)
+
+# Initialize and start data updater
+scheduler = BackgroundScheduler()
+scheduler.add_job(start_updates, 'interval', seconds=60)
+scheduler.start()
 
 if __name__ == "__main__":
-    print("API key is: ", api_key)
-    #app.run(debug=True, port=8080, use_reloader=False)
+    app.run(debug=True, port=8080, use_reloader=False)

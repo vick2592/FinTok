@@ -1,12 +1,33 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import fetch from "isomorphic-unfetch";
 import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 
-const projectId = process.env.NEXT_PUBLIC_INFURA_API_KEY || "Create .env file in root directory and enter API key";
-//const projectId = "Test";
+//const projectId = process.env.NEXT_PUBLIC_INFURA_API_KEY || "Create .env file in root directory and enter API key";
 
 const Home: NextPage = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8080/api/ethereum_cpf/price");
+        if (response.ok) {
+          const jsonData = await response.json();
+          setData(jsonData);
+        } else {
+          console.error("Failed to fetch data");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <MetaHeader />
@@ -17,9 +38,9 @@ const Home: NextPage = () => {
             <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
           </h1>
           <p className="text-center text-lg">
-            Api key is{" "}
+            Current ETH Price is{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              {projectId}
+              {JSON.stringify(data, null, 2)}
             </code>
           </p>
           <p className="text-center text-lg">
