@@ -1,32 +1,26 @@
-import { useEffect, useState } from "react";
+/*import { useEffect, useState } from "react";*/
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import type { NextPage } from "next";
+import { useQuery } from "react-query";
 import { BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 
 //const projectId = process.env.NEXT_PUBLIC_INFURA_API_KEY || "Create .env file in root directory and enter API key";
 
 const Home: NextPage = () => {
-  const [data, setData] = useState(null);
+  const fetchData = async () => {
+    const response = await fetch("http://127.0.0.1:8080/api/ethereum_cpf/price");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:8080/api/ethereum_cpf/price");
-        if (response.ok) {
-          const jsonData = await response.json();
-          setData(jsonData);
-        } else {
-          console.error("Failed to fetch data");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
 
-    fetchData();
-  }, []);
+    return response.json();
+  };
+  const { data, isLoading, isError } = useQuery("ethereumPrice", fetchData, {
+    staleTime: 60000, // Set the staleTime to 60,000 milliseconds (1 minute)
+  });
 
   return (
     <>
@@ -40,7 +34,7 @@ const Home: NextPage = () => {
           <p className="text-center text-lg">
             Current ETH Price is{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              {JSON.stringify(data, null, 2)}
+              {isLoading ? "Loading..." : isError ? "Error" : data?.ETH_Price_Chainlink_Nodes}
             </code>
           </p>
           <p className="text-center text-lg">

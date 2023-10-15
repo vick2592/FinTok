@@ -4,6 +4,8 @@ import { RainbowKitProvider, darkTheme, lightTheme } from "@rainbow-me/rainbowki
 import "@rainbow-me/rainbowkit/styles.css";
 import NextNProgress from "nextjs-progressbar";
 import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { useDarkMode } from "usehooks-ts";
 import { WagmiConfig } from "wagmi";
 import { Footer } from "~~/components/Footer";
@@ -14,6 +16,8 @@ import { useGlobalState } from "~~/services/store/store";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { appChains } from "~~/services/web3/wagmiConnectors";
 import "~~/styles/globals.css";
+
+const queryClient = new QueryClient();
 
 const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   const price = useNativeCurrencyPrice();
@@ -33,23 +37,27 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   }, [isDarkMode]);
 
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <NextNProgress />
-      <RainbowKitProvider
-        chains={appChains.chains}
-        avatar={BlockieAvatar}
-        theme={isDarkTheme ? darkTheme() : lightTheme()}
-      >
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="relative flex flex-col flex-1">
-            <Component {...pageProps} />
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <QueryClientProvider client={queryClient}>
+      <WagmiConfig config={wagmiConfig}>
+        <NextNProgress />
+        <RainbowKitProvider
+          chains={appChains.chains}
+          avatar={BlockieAvatar}
+          theme={isDarkTheme ? darkTheme() : lightTheme()}
+        >
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="relative flex flex-col flex-1">
+              <Component {...pageProps} />
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
+          {/*Remove ReactQueryDevTools when all is working*/}
+          <ReactQueryDevtools />
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </QueryClientProvider>
   );
 };
 
