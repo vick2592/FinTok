@@ -51,8 +51,12 @@ def fetch_bitfinex_candlestick_data(symbol, timeframe, limit):
 
 cache = Cache()
 
-def start_updates():
+def start_updates_cle():
     eth_price_chainlink_nodes = fetch_ethereum_price_chainlink_nodes()
+    print(f"Updated - Chainlink Price: {eth_price_chainlink_nodes}")
+    cache.set('ETH_Price_Chainlink_Nodes', f'{eth_price_chainlink_nodes}')
+        
+def start_updates_bfe():
     symbol = 'tETHUSD'  # Example: Bitcoin/US Dollar
     timeframe = '1m'    # Example: 1 minute candlesticks
     limit = 1          # Example: Number of data points to retrieve
@@ -64,13 +68,11 @@ def start_updates():
         low_prices = [candle[4] for candle in candlestick_data]
         close_prices = [candle[2] for candle in candlestick_data]
 
-        print(f"Updated - Chainlink Price: {eth_price_chainlink_nodes}")
         print(f"Bitfinex Candlestick Data:")
         print(f"Open Prices: {open_prices}")
         print(f"High Prices: {high_prices}")
         print(f"Low Prices: {low_prices}")
         print(f"Close Prices: {close_prices}")
 
-        cache.set('ETH_Price_Chainlink_Nodes', f'{eth_price_chainlink_nodes}')
     else:
         print(f"Failed to fetch Bitfinex candlestick data.")

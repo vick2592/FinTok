@@ -13,7 +13,7 @@ class APIRoutes:
     def register_routes(self):
         @self.app.route('/api/ethereum_cpf/price', methods=['GET'])
         def get_ethereum_cpf_price():
-            print(self.cache.get('ETH_Price_Chainlink_Nodes'))
+            #print(self.cache.get('ETH_Price_Chainlink_Nodes'))
             return jsonify({"ETH_Price_Chainlink_Nodes": self.cache.get('ETH_Price_Chainlink_Nodes')})
 
         # More routes...
