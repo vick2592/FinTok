@@ -1,0 +1,1 @@
+2023-10-17 23:48, 1061.05_Crypto_trader, test episodes:1, net worth:438.75917555964224, orders per episode:612.0, no profit episodes:1, model: CNN, comment: 3 months
