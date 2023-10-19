@@ -4,6 +4,8 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense, Flatten, Conv1D, MaxPooling1D#, LSTM
 from tensorflow.compat.v1.keras.layers import CuDNNLSTM as LSTM # only for GPU
 from tensorflow.keras import backend as K
+import time
+
 #tf.config.experimental_run_functions_eagerly(True) # used for debuging and development
 tf.compat.v1.disable_eager_execution() # usually using this for fastest performance
 
@@ -134,6 +136,8 @@ class Actor_Model:
         return total_loss
 
     def actor_predict(self, state):
+        # print("The Current state is: ", state)
+        # time.sleep(10)
         return self.Actor.predict(state)
 
 class Critic_Model:

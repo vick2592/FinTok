@@ -4,8 +4,11 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from routes import APIRoutes
 from cache import Cache
 from updater import start_updates_cle, start_updates_bfe
-from train_test import CustomAgent, CustomEnv
+from collections import deque
 import pandas as pd
+import numpy as np
+from train_test import CustomAgent, CustomEnv
+from utils import TradingGraph, Write_to_file, Normalizing
 from tensorflow.keras.optimizers import Adam
 from indicators import *
 
@@ -20,59 +23,42 @@ api_routes = APIRoutes(app, socketio, cache)
 #To get initial Chainlink Ethereum price
 start_updates_cle()
 
-# Create a global variable for your trained agent
-df = pd.read_csv('./ETHUSD_1h.csv')
-df = df.dropna()
-df = df.sort_values('Date')
-
-df = AddIndicators(df) # insert indicators to df 2021_02_21_17_54_Crypto_trader
-#df = indicators_dataframe(df, threshold=0.5, plot=False) # insert indicators to df 2021_02_18_21_48_Crypto_trader
-depth = len(list(df.columns[1:])) # OHCL + indicators without Date
-trained_agent = CustomAgent(lookback_window_size=100, lr=0.00001, epochs=5, optimizer=Adam, batch_size=32, model="CNN", depth=depth, comment="Normalized")
-
-# Create a function to load the trained model and make predictions
+# Function to make predictions
 def make_predictions():
-    global trained_agent
-    # Load the trained model weights (you may need to provide the correct paths)
-    trained_agent.load(folder="2023_10_17_22_07_Crypto_trader", name="1061.05_Crypto_trader")
-    
-# Function to fetch the current state from the CSV file
-    def fetch_hourly_ETH_price_data():
-        try:
-            # Load the CSV file containing hourly ETH price data
-            df = pd.read_csv('./ETHUSD_1h.csv')
+    # Get the current state from the test environment
+    print("Making Prediction...")
+    # Load the test dataset
+    df = pd.read_csv('./ETHUSD_1h.csv')
+    df = df.dropna()
+    df = df.sort_values('Date')
+    df = AddIndicators(df)
+    depth = len(list(df.columns[1:]))
+    test_df = df[-100:]  # Assuming you want to predict on the last 100 rows for testing
+    df_nomalized = Normalizing(df[99:])[1:].dropna()
+    # Initialize the environment with the test dataset
+    test_env = CustomEnv(df=test_df, df_normalized=df_nomalized, lookback_window_size=100)
 
-            # Get the most recent data point (last row)
-            current_state = df.iloc[-1].to_numpy()  # Assumes your data is in a suitable format
+    agent = CustomAgent(lookback_window_size=100, lr=0.00001, epochs=5, optimizer=Adam, batch_size=32, model="CNN", depth=depth, comment="Normalized")
+    agent.load(folder="2023_10_17_22_07_Crypto_trader", name="1061.05_Crypto_trader")
+    state = test_env.reset()
 
-            # Optionally, you can pre-process the data to fit your state representation
+    # Make predictions using the trained agent
+    action, prediction = agent.act(state)
 
-            return current_state
-        except Exception as e:
-            print(f"Error fetching current state: {str(e)}")
-            return None
-        
+    # Perform action (buy/sell/hold) based on the agent's prediction
+    # Implement your logic here if needed
 
-    
-    # Get the current state from your data source (hourly data)
-    current_state = fetch_hourly_ETH_price_data()  # Fetch the current state from your data source
-    current_state = current_state.reshape(1, 1, 6)
-    
-    if current_state is not None:
-    # Use the current state for making predictions
-        action, prediction = trained_agent.act(current_state)
-        print(f"Action: {action}, Prediction: {prediction}")
-    else:
-        print("Error fetching current state")
+    # Print or use the action and prediction
+    print(f"Action: {action}, Prediction: {prediction}")
 
-#Test is make_predictions() works
+# Call the function to make predictions
 make_predictions()
 
 # Initialize and start data updater
 scheduler = BackgroundScheduler()
 scheduler.add_job(start_updates_cle, 'interval', seconds=60)
-scheduler.add_job(start_updates_bfe, 'interval', seconds=60) # do 3600 every hour but for testing let it run every minute
-scheduler.add_job(make_predictions, 'interval', hours=1)  # Run every hour
+scheduler.add_job(start_updates_bfe, 'interval', seconds=1800) # do 3600 every hour but for testing let it run every minute
+scheduler.add_job(make_predictions, 'interval', seconds=60)  # Run every hour put hours=1
 scheduler.start()
 
 if __name__ == "__main__":

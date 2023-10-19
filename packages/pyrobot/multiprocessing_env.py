@@ -156,6 +156,7 @@ def test_multiprocessing(CustomEnv, CustomAgent, test_df, test_df_nomalized, num
             if reset:
                 episode += 1
                 #print(episode, net_worth, episode_orders)
+                #print("Episode:", episode, "State:", state[worker_id])
                 average_net_worth += net_worth
                 average_orders += episode_orders
                 if net_worth < initial_balance: no_profit_episodes += 1 # calculate episode count where we had negative profit through episode

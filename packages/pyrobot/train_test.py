@@ -346,8 +346,8 @@ if __name__ == "__main__":
     #train_multiprocessing(CustomEnv, agent, train_df, train_df_nomalized, num_worker = 16, training_batch_size=500, visualize=False, EPISODES=10000)
     #Note good training episodes 200000 
 
-    #test_multiprocessing(CustomEnv, CustomAgent, test_df, test_df_nomalized, num_worker = 16, visualize=False, test_episodes=1000, folder="2021_02_18_21_48_Crypto_trader", name="3906.52_Crypto_trader", comment="3 months")
-    test_multiprocessing(CustomEnv, CustomAgent, test_df, test_df_nomalized, num_worker = 16, visualize=True, test_episodes=1, folder="2023_10_17_22_07_Crypto_trader", name="1061.05_Crypto_trader", comment="3 months")
+    test_multiprocessing(CustomEnv, CustomAgent, test_df, test_df_nomalized, num_worker = 16, visualize=False, test_episodes=1, folder="2023_10_17_22_07_Crypto_trader", name="1061.05_Crypto_trader", comment="3 months")
+    #test_multiprocessing(CustomEnv, CustomAgent, test_df, test_df_nomalized, num_worker = 16, visualize=True, test_episodes=1, folder="2023_10_17_22_07_Crypto_trader", name="1061.05_Crypto_trader", comment="3 months")
     #Note good test episodes is 1000
 
     #The main parameters you can change are the following: lookback_window_size, learning rate (lr), epochs, optimizer, batch_size, model type,
