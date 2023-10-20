@@ -93,3 +93,7 @@ def start_updates_bfe():
 
     # else:
     #     print(f"Failed to fetch Bitfinex 1-hour candlestick data.")
+
+def get_price_feed():
+    start_updates_cle()
+    start_updates_bfe()
