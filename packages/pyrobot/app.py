@@ -23,7 +23,7 @@ load_dotenv()
 infura_api_key = os.environ['NEXT_PUBLIC_INFURA_API_KEY']
 wallet_private_key = os.environ['NEXT_PUBLIC_private_key']
 
-print(infura_api_key, wallet_private_key)
+#print(infura_api_key, wallet_private_key)
 
 # Initialize Web3 with your Ethereum node's URL (e.g., Infura)
 #w3 = Web3(Web3.HTTPProvider("YOUR_ETHEREUM_NODE_URL"))
