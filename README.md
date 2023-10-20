@@ -1,6 +1,6 @@
 # 🤖 FinTok
 
-🧪 An open-source, up-to-date DeFi Trading Robot.
+🧪 An open-source DeFi Trading Robot application that utilizes OpenZepplin's audited Staking Contract for users to be able to deposit ETH or USDC for trading and then withdraw with rewards.
 
 ⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, and Typescript.
 
@@ -19,7 +19,6 @@
   - [Disabling commit checks](#disabling-commit-checks)
   - [Deploying to Vercel without any checks](#deploying-to-vercel-without-any-checks)
   - [Disabling Github Workflow](#disabling-github-workflow)
-- [Contributing to Scaffold-ETH 2](#contributing-to-scaffold-eth-2)
 
 ## Requirements
 
@@ -31,13 +30,13 @@ Before you begin, you need to install the following tools:
 
 ## Quickstart
 
-To get started with Scaffold-ETH 2, follow the steps below:
+To get started with FinTok, follow the steps below:
 
 1. Clone this repo & install dependencies
 
 ```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
+git clone https://github.com/vick2592/FinTok.git
+cd fintok
 yarn install
 ```
 
@@ -70,6 +69,36 @@ Run smart contract test with `yarn hardhat:test`
 - Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
 - Edit your frontend in `packages/nextjs/pages`
 - Edit your deployment scripts in `packages/hardhat/deploy`
+
+Python Trading robot setup and Integration
+
+Install all pip required libraries:
+
+```shell
+pip install -r requirements.txt
+```
+
+To run the python integration you need to run:
+
+```shell
+python app.py
+```
+
+from the pyrobot directory
+
+If you would like to train and test the robot to utilize your own data you can run:
+
+```shell
+python train_test.py
+```
+
+After training, make sure to insert the proper agent.load configurations in app.py
+
+```shell
+agent.load(folder="2023_10_17_22_07_Crypto_trader_Insert_Yours_Folder_Name", name="1061.05_Crypto_trader_Insert_Your_Trader_Model")
+```
+
+Keep in mind, if you would like to test your trained model you would need to comment out train script and uncomment test script with the correct folder and model name.
 
 ## Deploying your Smart Contracts to a Live Network
 
@@ -299,19 +328,3 @@ If your repo is connected to Vercel, you can set `NEXT_PUBLIC_IGNORE_BUILD_ERROR
 We have github workflow setup checkout `.github/workflows/lint.yaml` which runs types and lint error checks every time code is **pushed** to `main` branch or **pull request** is made to `main` branch
 
 To disable it, **delete `.github` directory**
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
-
-### Python Integration
-
-To run the python integration you need to run:
-
-```shell
-python app.py
-```
-
-from the pyrobot directory
