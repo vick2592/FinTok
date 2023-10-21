@@ -1,7 +1,8 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "../contracts/YourContract.sol";
+import "../contracts/WETH9.sol";
+import "../contracts/StakingRewards.sol";
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -15,15 +16,28 @@ contract DeployScript is ScaffoldETHDeploy {
             );
         }
         vm.startBroadcast(deployerPrivateKey);
-        YourContract yourContract = new YourContract(
-            vm.addr(deployerPrivateKey)
+
+        // Deploy WETH9 contract
+        WETH9 weth = new WETH9();
+        console.logString(
+            string.concat(
+                "WETH9 deployed at: ",
+                vm.toString(address(weth))
+            )
+        );
+
+        // Deploy StakingRewards contract
+        StakingRewards stakingRewards = new StakingRewards(
+            vm.addr(deployerPrivateKey),
+            address(weth)  // Use the address of the deployed WETH contract as the reward token
         );
         console.logString(
             string.concat(
-                "YourContract deployed at: ",
-                vm.toString(address(yourContract))
+                "StakingRewards deployed at: ",
+                vm.toString(address(stakingRewards))
             )
         );
+
         vm.stopBroadcast();
 
         /**
