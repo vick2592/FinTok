@@ -27,6 +27,14 @@ p {
   @apply shadow-md;
 }
 
+.btn.traderbtn {
+    @apply bg-green-500;
+}
+
+.btn.traderbtn:hover {
+    @apply bg-green-600;
+}
+
 .btn.btn-ghost {
   @apply shadow-none;
 }
