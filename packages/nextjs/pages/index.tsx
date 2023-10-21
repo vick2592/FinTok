@@ -33,25 +33,10 @@ const Home: NextPage = () => {
           </h1>
           <p className="text-center text-lg">
             Current ETH Price is{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
+            <span className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
               {isLoading ? "Loading..." : isError ? "Error" : data?.ETH_Price_Chainlink_Nodes}
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/pages/index.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
+                      </span>
+                      {" "} Powered by ChainLink.
           </p>
         </div>
 
