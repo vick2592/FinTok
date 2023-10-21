@@ -1,10 +1,13 @@
-import { hardhat } from "wagmi/chains";
+/*import { hardhat } from "wagmi/chains";*/
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
+
 /*import { HeartIcon } from "@heroicons/react/24/outline";*/
 import { SwitchTheme } from "~~/components/SwitchTheme";
-import { Faucet } from "~~/components/scaffold-eth";
+
+/*import { Faucet } from "~~/components/scaffold-eth";*/
 import { useGlobalState } from "~~/services/store/store";
-import { getTargetNetwork } from "~~/utils/scaffold-eth";
+
+/*import { getTargetNetwork } from "~~/utils/scaffold-eth";*/
 
 /**
  * Site footer
@@ -23,7 +26,7 @@ export const Footer = () => {
                 <span>{nativeCurrencyPrice}</span>
               </div>
             )}
-            {getTargetNetwork().id === hardhat.id && <Faucet />}
+            {/*{getTargetNetwork().id === hardhat.id && <Faucet />}*/}
           </div>
           <SwitchTheme className="pointer-events-auto" />
         </div>
@@ -31,14 +34,9 @@ export const Footer = () => {
       <div className="w-full">
         <ul className="menu menu-horizontal w-full">
           <div className="flex justify-center items-center gap-2 text-sm w-full">
-            <div className="text-center">
-              <a
-                href="https://github.com/vick2592/FinTok"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-2"
-              >
-                Fork me
+            <div className="btn gitbtn text-center">
+              <a href="https://github.com/vick2592/FinTok" target="_blank" rel="noreferrer">
+                GitHub Repo
               </a>
             </div>
             {/*<span>·</span>*/}

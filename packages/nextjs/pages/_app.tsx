@@ -5,7 +5,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import NextNProgress from "nextjs-progressbar";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+//import { ReactQueryDevtools } from "react-query/devtools";
 import { useDarkMode } from "usehooks-ts";
 import { WagmiConfig } from "wagmi";
 import { Footer } from "~~/components/Footer";
@@ -53,8 +53,8 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
             <Footer />
           </div>
           <Toaster />
-          {/*Remove ReactQueryDevTools when all is working*/}
-          <ReactQueryDevtools />
+          {/*Uncomment ReactQueryDevTools when all is working*/}
+          {/*<ReactQueryDevtools />*/}
         </RainbowKitProvider>
       </WagmiConfig>
     </QueryClientProvider>

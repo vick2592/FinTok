@@ -28,11 +28,19 @@ p {
 }
 
 .btn.traderbtn {
-    @apply bg-green-500;
+  @apply bg-green-500;
 }
 
 .btn.traderbtn:hover {
-    @apply bg-green-600;
+  @apply bg-green-700;
+}
+
+.btn.gitbtn {
+    @apply bg-red-500;
+}
+
+.btn.gitbtn:hover {
+    @apply bg-red-700;
 }
 
 .btn.btn-ghost {

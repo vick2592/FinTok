@@ -8,7 +8,7 @@ interface ButtonProps {
   className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ href, children, className }) => {
+const Button: React.FC<ButtonProps> = ({ href, children }) => {
   return (
     <Link href={href} passHref>
       {children}
