@@ -125,7 +125,7 @@ def make_predictions():
 # Initialize and start data updater
 scheduler = BackgroundScheduler()
 scheduler.add_job(get_price_feed, 'interval', seconds=1800) # do 3600 every hour but for testing let it run every minute
-scheduler.add_job(make_predictions, 'interval', seconds=20) # Run every hour put hours=1
+scheduler.add_job(make_predictions, 'interval', seconds=1800) # Run every hour put hours=1
 scheduler.start()
 
 if __name__ == "__main__":
