@@ -28,15 +28,14 @@ const Home: NextPage = () => {
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
           <h1 className="text-center mb-8">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
+            <span className="block text-2xl mb-2 font-bold">Welcome to FinTok</span>
           </h1>
           <p className="text-center text-lg">
             Current ETH Price is{" "}
             <span className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
               {isLoading ? "Loading..." : isError ? "Error" : data?.ETH_Price_Chainlink_Nodes}
-                      </span>
-                      {" "} Powered by ChainLink.
+            </span>{" "}
+            Powered by ChainLink.
           </p>
         </div>
 
@@ -50,16 +49,6 @@ const Home: NextPage = () => {
                   Debug Contract
                 </Link>{" "}
                 tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <SparklesIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Experiment with{" "}
-                <Link href="/example-ui" passHref className="link">
-                  Example UI
-                </Link>{" "}
-                to build your own UI.
               </p>
             </div>
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
