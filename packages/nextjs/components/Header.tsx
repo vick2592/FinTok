@@ -83,6 +83,9 @@ export const Header = () => {
           <div className="flex relative w-10 h-10">
             <Image alt="FinTok logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
+          <div className="flex flex-col">
+            <span className="font-bold leading-tight">FinTok</span>
+          </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">{navLinks}</ul>
       </div>
