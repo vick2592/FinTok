@@ -36,7 +36,7 @@ export const Footer = () => {
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="btn gitbtn text-center">
               <a href="https://github.com/vick2592/FinTok" target="_blank" rel="noreferrer">
-                GitHub Repo
+                View our GitHub Repo
               </a>
             </div>
             {/*<span>·</span>*/}
