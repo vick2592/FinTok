@@ -100,10 +100,10 @@ const Agent: NextPage = () => {
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="card w-96 bg-base-100 shadow-xl">
           <div className="card-body">
-            <h2 className="card-title">Stake to Trading Agent</h2>
+            <h2 className="card-title">Stake WETH to Trading Agent</h2>
             <div className="p-2">
               Staked Balance: {stakedBalance !== undefined ? String(stakedBalance / BigInt(10 ** 18)) : "Loading..."}{" "}
-              ETH
+              WETH
             </div>
             <div className="p-1">
               <EtherInput
