@@ -28,7 +28,7 @@ contract DeployScript is ScaffoldETHDeploy {
 
         // Deploy StakingRewards contract
         StakingRewards stakingRewards = new StakingRewards(
-            vm.addr(deployerPrivateKey),
+            address(weth),
             address(weth)  // Use the address of the deployed WETH contract as the reward token
         );
         console.logString(

@@ -13,7 +13,6 @@ contract StakingRewardsTest is Test {
     }
 
     function testStakeAndWithdraw() public {
-        uint initialBalance = address(this).balance;
         uint depositAmount = 1 ether;
 
         // Stake tokens
