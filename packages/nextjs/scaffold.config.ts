@@ -11,11 +11,11 @@ export type ScaffoldConfig = {
 
 const scaffoldConfig = {
   // The network where your DApp lives in
-  targetNetwork: chains.foundry,
+  targetNetwork: chains.scrollSepolia,
 
   // The interval at which your front-end polls the RPC servers for new data
-  // it has no effect on the local network
-  pollingInterval: 30000,
+  // it has no effect on the local network, default was 30000 less is quicker
+  pollingInterval: 5000,
 
   // This is ours Alchemy's default API key.
   // You can get your own at https://dashboard.alchemyapi.io
