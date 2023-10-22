@@ -73,6 +73,7 @@ def action_1():
     w3 = Web3(Web3.HTTPProvider(scroll_sepolia_node_url))
     print("Action 1: Swapping GHO to ETH")
     amount_in_wei = int(amount_gho_to_eth * 1e18)
+    nonce = w3.eth.get_transaction_count(wallet_address)
 
     # Prepare the transaction data
     transaction = {
@@ -80,7 +81,7 @@ def action_1():
         "value": amount_in_wei,
         "gas": 2000000,
         "gasPrice": gas_price_in_wei,
-        "nonce": w3.eth.getTransactionCount(w3.toChecksumAddress(wallet_address)),
+        "nonce": nonce,
     }
 
     # Build the swap call to Uniswap V4 router
@@ -107,6 +108,7 @@ def action_2():
     gas_price_in_wei = int(gwei_price * 1e9)  # 1 Gwei = 1e9 Wei
     print("Action 2: Swapping ETH to GHO")
     amount_in_wei = int(amount_eth_to_gho * 1e18)
+    nonce = w3.eth.get_transaction_count(wallet_address)
 
     # Prepare the transaction data
     transaction = {
@@ -114,7 +116,7 @@ def action_2():
         "value": amount_in_wei,
         "gas": 2000000,
         "gasPrice": gas_price_in_wei,
-        "nonce": w3.eth.getTransactionCount(w3.toChecksumAddress(wallet_address)),
+        "nonce": nonce,
     }
 
     # Build the swap call to Uniswap V4 router (reverse swap)
