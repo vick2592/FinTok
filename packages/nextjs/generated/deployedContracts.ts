@@ -5,7 +5,7 @@ const contracts = {
       chainId: "31337",
       contracts: {
         WETH9: {
-          address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+          address: "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
           abi: [
             {
               anonymous: false,
@@ -294,7 +294,7 @@ const contracts = {
           ],
         },
         StakingRewards: {
-          address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+          address: "0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E",
           abi: [
             {
               inputs: [

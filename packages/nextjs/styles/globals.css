@@ -43,6 +43,14 @@ p {
     @apply bg-red-700;
 }
 
+.btn.approvebtn {
+    @apply bg-orange-500;
+}
+
+.btn.approvebtn:hover {
+    @apply bg-orange-700;
+}
+
 .btn.btn-ghost {
   @apply shadow-none;
 }
